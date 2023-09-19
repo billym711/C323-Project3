@@ -12,9 +12,32 @@
         <action
             android:id="@+id/action_mainFragment_to_act23"
             app:destination="@id/act23" />
+
     </fragment>
     <fragment
         android:id="@+id/act23"
         android:name="com.example.project3.Act2"
-        android:label="Act2" />
+        android:label="Act2" >
+        <action
+            android:id="@+id/action_act23_to_endScreen"
+            app:destination="@id/endScreen" />
+        <argument
+            android:name="difficulty"
+            app:argType="string"
+            />
+        <argument
+            android:name="operation"
+            app:argType="string"
+            />
+
+    </fragment>
+    <fragment
+        android:id="@+id/endScreen"
+        android:name="com.example.project3.endScreen"
+        android:label="fragment_end_screen"
+        tools:layout="@layout/fragment_end_screen" >
+        <action
+            android:id="@+id/action_endScreen_to_mainFragment"
+            app:destination="@id/mainFragment" />
+    </fragment>
 </navigation>
