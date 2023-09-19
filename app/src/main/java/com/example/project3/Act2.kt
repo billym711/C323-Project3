@@ -87,17 +87,26 @@ class Act2 : Fragment() {
                 if (message2 == "Multiply" && (answer == (num1 * num2).toDouble())) {
                     numCorrect++
                 }
-                if (message2 == "Divide" && answerText.text.length < 20) {
-                    if ((answer == (num1 / num2).toDouble())) {
+                //currently, division ignores remainders and just truncates.
+                if (message2 == "Divide") {
+
+                    if (answer == (num1 / num2).toDouble()) {
+                        numCorrect++
+                    }
+                }
+                //This is another section of code that could be enabled to use decimals in the division portion of the app
+                /*if (message2 == "Divide" && (num1 / num2).toString().length < 20) {
+                    if ((answer == (num1.toDouble() / num2.toDouble()))) {
                         numCorrect++
                     }
                 }
                 //This adds a check for repeating numbers so that the user only needs to put 3 decimal places
-                if (message2 == "Divide" && answerText.text.length >= 20) {
+                if (message2 == "Divide" && (num1 / num2).toString().length >= 20) {
                     if ((answer == truncate((num1 / num2).toDouble() * 1000) / 1000)) {
                         numCorrect++
                     }
                 }
+                 */
                 if (message2 == "Subtract" && (answer == (num1 - num2).toDouble())) {
                     numCorrect++
                 }
@@ -130,6 +139,10 @@ class Act2 : Fragment() {
                         num2 = (0..49).random()
                         num1Text.text = num1.toString()
                         num2Text.text = num2.toString()
+                    }
+                    if (message2 == "Divide" && num2 == 0){
+                            num2 = 1
+                            num2Text.text = num2.toString()
                     }
                 }
             }
