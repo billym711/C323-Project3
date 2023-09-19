@@ -29,6 +29,10 @@
             android:name="operation"
             app:argType="string"
             />
+        <argument
+            android:name="questions"
+            app:argType="string"
+            />
 
     </fragment>
     <fragment
@@ -39,5 +43,13 @@
         <action
             android:id="@+id/action_endScreen_to_mainFragment"
             app:destination="@id/mainFragment" />
+        <argument
+            android:name="numCorrect"
+            app:argType="string"
+            />
+        <argument
+            android:name="numAnswered"
+            app:argType="string"
+            />
     </fragment>
 </navigation>

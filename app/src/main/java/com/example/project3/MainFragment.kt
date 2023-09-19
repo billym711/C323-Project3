@@ -17,17 +17,9 @@ import androidx.navigation.findNavController
 
 class MainFragment : Fragment() {
 
-    // This establishes some basic variables to store numbers and convert them to a printable string
-    // We also have booleans to determine whether or not we are currently doing an operation, and which specific operation we're doing.
-    private var currentString: String = ""
-    private var currentNumber: Double = 0.0
-    private var storedNumber: Double = 0.0
-    private var doingOp: Boolean = false
-    private var additionWait: Boolean = false
-    private var subtractionWait: Boolean = false
-    private var divisionWait: Boolean = false
-    private var multiplicationWait: Boolean = false
-
+//This is the starting screen.
+    // It allows the user to select the number of questions, the difficulty, and the type of operation.
+    // pressing start takes the user to the next screen.
 
 
     override fun onCreateView(
@@ -36,6 +28,9 @@ class MainFragment : Fragment() {
     ): View? {
         // Inflate the layout for this fragment
         val view = inflater.inflate(R.layout.fragment_main, container, false)
+        // This gets access to all the elements we need on this page
+        //(Radio buttons, start button, +/- buttons, and text elements)
+
         val startButton = view.findViewById<Button>(R.id.button)
         val diffButtonEasy = view.findViewById<RadioButton>(R.id.testButton)
         val diffButtonMedium = view.findViewById<RadioButton>(R.id.radioButton2)
@@ -46,13 +41,15 @@ class MainFragment : Fragment() {
         val operButtonSub = view.findViewById<RadioButton>(R.id.radioButton10)
         var difficultyGroup = view.findViewById<RadioGroup>(R.id.difficulty)
         var operationGroup = view.findViewById<RadioGroup>(R.id.operation)
-        val plusButton = view.findViewById<ImageButton>(R.id.imageButton)
-        val minusButton = view.findViewById<ImageButton>(R.id.imageButton2)
+        val plusButton = view.findViewById<Button>(R.id.button5)
+        val minusButton = view.findViewById<Button>(R.id.button4)
 
+        //These variables are set here, but are changed when a button is clicked
         var diff = "Easy"
         var oper = "Addition"
         var questionNum = 10
         difficultyGroup.setOnCheckedChangeListener { group, checkedId ->
+            //we set the radio button group to listen for a change, and update the difficulty variable
             if (diffButtonEasy.isChecked) {
                 diff = "Easy"
             }
@@ -64,7 +61,9 @@ class MainFragment : Fragment() {
             }
         }
             operationGroup.setOnCheckedChangeListener { group, checkedId ->
-            if (operButtonAdd.isChecked) {
+                //we set the radio button group to listen for a change, and update the operation variable
+
+                if (operButtonAdd.isChecked) {
                 oper = "Add"
             }
             if (operButtonMult.isChecked) {
@@ -78,22 +77,35 @@ class MainFragment : Fragment() {
             }
         }
 
+        //This sets the default number of questions
 
         var numOfQuestions = view.findViewById<TextView>(R.id.textView4)
         numOfQuestions.text = questionNum.toString()
 
         plusButton.setOnClickListener {
+            //When the plus or minus button is clicked, we increase or decrease the number of questions
             questionNum++
             numOfQuestions.text = questionNum.toString()
         }
         minusButton.setOnClickListener {
-            questionNum--
+            //we check to make sure the question number is not less than 1
+            if (questionNum > 1) {
+                questionNum--
+            }
             numOfQuestions.text = questionNum.toString()
         }
         startButton.setOnClickListener {
-            val action = MainFragmentDirections.actionMainFragmentToAct23(diff, oper)
-            view.findNavController()
-                .navigate(action)
+            //if the radio buttons don't have options, do not move to the next screen. Else, move on.
+            if (!diff.isNullOrEmpty() && !oper.isNullOrEmpty()) {
+                //this sends the necessary variables over to the next fragment
+                val action = MainFragmentDirections.actionMainFragmentToAct23(
+                    diff,
+                    oper,
+                    questionNum.toString()
+                )
+                view.findNavController()
+                    .navigate(action)
+            }
         }
 
         return view

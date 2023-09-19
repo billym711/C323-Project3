@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.navigation.findNavController
 
@@ -24,14 +25,22 @@ class endScreen : Fragment() {
 
 
     override fun onCreateView(
+        //The last page of the app. Shows the user score
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
         val view = inflater.inflate(R.layout.fragment_end_screen, container, false)
+        //Getting access to variables
         val startButton = view.findViewById<Button>(R.id.button3)
+        val message = endScreenArgs.fromBundle(requireArguments()).numCorrect
+        val message2 = endScreenArgs.fromBundle(requireArguments()).numAnswered
+        val finalText = view.findViewById<TextView>(R.id.textView10)
+        //sets the final score text with the variables we sent in the previous screen
+        finalText.text = message + " out of " + message2
 
         startButton.setOnClickListener {
+            //when button is clicked, move back to start
             view.findNavController()
                 .navigate(R.id.action_endScreen_to_mainFragment)
         }
