@@ -10,19 +10,22 @@
         android:label="fragment_main"
         tools:layout="@layout/fragment_main" >
         <argument
-            android:name="isResult"
-            app:argType="boolean"
-            />
-        <argument
             android:name="questionsCorrect"
+            android:defaultValue="0"
             app:argType="string"
             />
         <argument
             android:name="questionsTotal"
+            android:defaultValue="0"
             app:argType="string"
 
             />
+        <argument
+            android:name="prevOperation"
+            android:defaultValue="addition"
+            app:argType="string"
 
+            />
         <action
             android:id="@+id/action_mainFragment_to_act23"
             app:destination="@id/act23" />

@@ -1,5 +1,6 @@
 package com.example.project3
 
+import android.media.MediaPlayer
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
@@ -9,6 +10,7 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.navigation.findNavController
 import org.w3c.dom.Text
@@ -79,19 +81,46 @@ class Act2 : Fragment() {
         startButton.setOnClickListener {
             //when they click DONE, only progress if they entered something
             if (!answerText.text.isNullOrEmpty()) {
+                //Creating toasts for correct and incorrect answers
+                val correctToast = Toast.makeText(context, "Correct. Good work!", Toast.LENGTH_SHORT)
+                val incorrectToast = Toast.makeText(context, "Wrong", Toast.LENGTH_SHORT)
+                //creating media players for correct and incorrect answers
+                val mediaPlayerCorrect = MediaPlayer.create(context, R.raw.correct_sound)
+                val mediaPlayerIncorrect = MediaPlayer.create(context, R.raw.incorrect_sound)
                 answer = answerText.text.toString().toDouble()
                 //Calculate the correct answer and compare
+                //Also show the proper toast and play the corresponding media
                 if (message2 == "Add" && (answer == (num1 + num2).toDouble())) {
                     numCorrect++
+                    correctToast.show()
+                    mediaPlayerCorrect.start()
+                }
+                if (message2 == "Add" && (answer != (num1 + num2).toDouble())) {
+                    incorrectToast.show()
+                    mediaPlayerIncorrect.start()
                 }
                 if (message2 == "Multiply" && (answer == (num1 * num2).toDouble())) {
                     numCorrect++
+                    correctToast.show()
+                    mediaPlayerCorrect.start()
+
+                }
+                if (message2 == "Multiply" && (answer != (num1 * num2).toDouble())) {
+                    incorrectToast.show()
+                    mediaPlayerIncorrect.start()
+
                 }
                 //currently, division ignores remainders and just truncates.
                 if (message2 == "Divide") {
 
                     if (answer == (num1 / num2).toDouble()) {
                         numCorrect++
+                        correctToast.show()
+                        mediaPlayerCorrect.start()
+
+                    }else{
+                        incorrectToast.show()
+                        mediaPlayerIncorrect.start()
                     }
                 }
                 //This is another section of code that could be enabled to use decimals in the division portion of the app
@@ -109,15 +138,34 @@ class Act2 : Fragment() {
                  */
                 if (message2 == "Subtract" && (answer == (num1 - num2).toDouble())) {
                     numCorrect++
+                    correctToast.show()
+                    mediaPlayerCorrect.start()
+
+                }
+                if (message2 == "Subtract" && (answer != (num1 - num2).toDouble())) {
+                    incorrectToast.show()
+                    mediaPlayerIncorrect.start()
+
                 }
                 numAnswered++
                 if (numAnswered == message3.toInt()) {
                     //if we reach our question maximum, go to the next screen and send the variables
-                    val action = Act2Directions.actionAct23ToMainFragment(
-                        true,
-                        numCorrect.toString(),
-                        numAnswered.toString()
-                    )
+                    val action = Act2Directions.actionAct23ToMainFragment()
+                    //because we have default values for our variables that we send, we have to define them here, instead of in parentheses.
+                    action.questionsCorrect = numCorrect.toString()
+                    action.questionsTotal = numAnswered.toString()
+                    if (message2 == "Add"){
+                        action.prevOperation = "addition"
+                    }
+                    if (message2 == "Subtract"){
+                        action.prevOperation = "subtraction"
+                    }
+                    if (message2 == "Multiply"){
+                        action.prevOperation = "multiplication"
+                    }
+                    if (message2 == "Divide"){
+                        action.prevOperation = "division"
+                    }
                     view.findNavController()
                         .navigate(action)
                 } else {
