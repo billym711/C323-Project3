@@ -27,9 +27,15 @@ class MainFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
+        var isResult = false
         val view = inflater.inflate(R.layout.fragment_main, container, false)
         // This gets access to all the elements we need on this page
         //(Radio buttons, start button, +/- buttons, and text elements)
+        isResult = MainFragmentArgs.fromBundle(requireArguments()).isResult
+        if (isResult){
+            val numberCorrect = MainFragmentArgs.fromBundle(requireArguments()).questionsCorrect
+            val numberTotal = MainFragmentArgs.fromBundle(requireArguments()).questionsTotal
+            }
 
         val startButton = view.findViewById<Button>(R.id.button)
         val diffButtonEasy = view.findViewById<RadioButton>(R.id.testButton)

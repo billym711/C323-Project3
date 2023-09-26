@@ -113,7 +113,8 @@ class Act2 : Fragment() {
                 numAnswered++
                 if (numAnswered == message3.toInt()) {
                     //if we reach our question maximum, go to the next screen and send the variables
-                    val action = Act2Directions.actionAct23ToEndScreen(
+                    val action = Act2Directions.actionAct23ToMainFragment(
+                        true,
                         numCorrect.toString(),
                         numAnswered.toString()
                     )

@@ -9,6 +9,20 @@
         android:name="com.example.project3.MainFragment"
         android:label="fragment_main"
         tools:layout="@layout/fragment_main" >
+        <argument
+            android:name="isResult"
+            app:argType="boolean"
+            />
+        <argument
+            android:name="questionsCorrect"
+            app:argType="string"
+            />
+        <argument
+            android:name="questionsTotal"
+            app:argType="string"
+
+            />
+
         <action
             android:id="@+id/action_mainFragment_to_act23"
             app:destination="@id/act23" />
@@ -18,9 +32,6 @@
         android:id="@+id/act23"
         android:name="com.example.project3.Act2"
         android:label="Act2" >
-        <action
-            android:id="@+id/action_act23_to_endScreen"
-            app:destination="@id/endScreen" />
         <argument
             android:name="difficulty"
             app:argType="string"
@@ -33,23 +44,9 @@
             android:name="questions"
             app:argType="string"
             />
-
-    </fragment>
-    <fragment
-        android:id="@+id/endScreen"
-        android:name="com.example.project3.endScreen"
-        android:label="fragment_end_screen"
-        tools:layout="@layout/fragment_end_screen" >
         <action
-            android:id="@+id/action_endScreen_to_mainFragment"
+            android:id="@+id/action_act23_to_mainFragment"
             app:destination="@id/mainFragment" />
-        <argument
-            android:name="numCorrect"
-            app:argType="string"
-            />
-        <argument
-            android:name="numAnswered"
-            app:argType="string"
-            />
+
     </fragment>
 </navigation>
