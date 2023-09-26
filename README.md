@@ -1,35 +1,37 @@
-# Project 1: Basic Calculator
-
-An Android app for a simple calculator, for C323 Android Mobile Development.
-It has addition, subtraction, multiplication, division, decimals, a percent button, a negative button, and a clear button.
+# Project 4: Arithmetic Practice Upgrade
+An Android app for an arithmetic practice game, for C323 Android Mobile Development.
+It has 3 difficulties: Easy, Medium, and Hard.
+It has 4 operations: Addition, Subtraction, Division, and Multiplication.
+Instead of going to a 3rd screen, it now returns to the first screen with results.
+It also has a Toast notification and a sound after submitting each answer.
 
 ## Functionality 
 
 The following **required** functionality is completed:
 
-* [ ] User can enter a number (displayed on the top)
-* [ ] User can choose an operation and choose another number
-* [ ] User can choose another operation or equals to view the result
-* [ ] User can clear everything with C button
-* [ ] User can make numbers negative or positive with +/-
-* [ ] User can choose % to divide the current number by 100.
+* [ ] User can choose a difficulty
+* [ ] User can choose an operation type
+* [ ] User can choose the number of questions
+* [ ] User can enter and submit their answer to each question
+* [ ] User sees a Toast notification indicating correct or incorrect after each question
+* [ ] User can hear a sound based on if their answer was correct or incorrect
 
 
 The following **extensions** are implemented:
 
-* I didn't implement any extensions for this project.
+* I added some code so that the user could do decimal math for division, but left it commented out for now.
 
 ## Video Walkthrough
 
 Here's a walkthrough of implemented user stories:
 
-<img src='Project1Demo.gif' title='Video Walkthrough' width='50%' alt='Video Walkthrough' />
+<img src='Project3Demo.gif' title='Video Walkthrough' width='50%' alt='Video Walkthrough' />
 
 GIF created with [LiceCap](http://www.cockos.com/licecap/).
 
 ## Notes
 
-Managing each sequential operation was tricky if I didn't press equal between them. I tried to fix the bugs around it, but there may be things that I forgot to test.
+Getting the arguments to hold default values was difficult because you have to explicitly set them, which I didn't know at first.
 
 ## License
 
